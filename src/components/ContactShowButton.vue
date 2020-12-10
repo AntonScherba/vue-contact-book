@@ -1,7 +1,9 @@
 <template>
-  <button @click="$emit('toggle-show')" class="show-contact-form">
-    Add Contact
-  </button>
+  <div>
+    <button @click="$emit('toggle-show')" class="show-contact-form">
+      Add Contact
+    </button>
+  </div>
 </template>
 
 <script>
@@ -11,9 +13,12 @@ export default {
 </script>
 
 <style scoped>
+div {
+  display: flex;
+}
 .show-contact-form {
   color: white;
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding: 20px;
   outline: none;
   border: none;
@@ -21,8 +26,8 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-transform: uppercase;
-  width: 275px;
-  margin: 20px 10px;
+  min-width: 275px;
+  margin: 20px auto;
 }
 
 .show-contact-form:hover {

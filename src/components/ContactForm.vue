@@ -1,9 +1,9 @@
 <template>
-  <div class="contact-container" :class="{ 'show-contact': isShow }">
+  <div class="contact-container" v-show="isShow">
     <div class="contact">
-      <div @click="$emit('toggle-show')" class="close-icon">&times;</div>
       <div class="contact-header">
         <h3>Add Contact</h3>
+        <i @click="$emit('toggle-show')" class="close-icon">&times;</i>
       </div>
       <div class="contact-content">
         <form @submit.prevent="submit">
@@ -16,9 +16,8 @@
           <div class="form-group">
             <label class="form-label" for="contact-phone">Phone Number</label>
             <input class="form-input" type="tel" v-model.trim="phone" />
-            {{ name.length }}
           </div>
-          <button type="submit">Save</button>
+          <button type="submit" class="save-btn">Save</button>
         </form>
       </div>
     </div>
@@ -28,7 +27,11 @@
 <script>
 export default {
   name: "ContactForm",
-  props: ["isShow"],
+  props: {
+    isShow: {
+      type: Boolean,
+    },
+  },
   data() {
     return {
       name: "",
@@ -37,8 +40,37 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit("toggle-show");
       console.log(this.name, this.phone);
+      // Validate
+      if (!this.validate(this.name, this.phone)) {
+        return false;
+      }
+      // Set contact object, add to array
+      const contact = {
+        id: Date.now(),
+        name: this.name,
+        phone: this.phone,
+      };
+      this.$emit("add-contact", contact);
+
+      // Reset input fields
+      this.resetContactForm();
+    },
+    // Validate Form
+    validate(name, phone) {
+      // const expression = /(https)?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
+      // const regex = new RegExp(expression);
+      if (!name || !phone) {
+        alert("Please submit values for both fields.");
+        return false;
+      }
+      // Valid
+      return true;
+    },
+    // Reset Contact Form
+    resetContactForm() {
+      this.name = "";
+      this.phone = "";
     },
   },
 };
@@ -48,18 +80,14 @@ export default {
 /* Contact */
 .contact-container {
   background: rgba(0, 0, 0, 0.6);
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.show-contact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .contact {
@@ -80,21 +108,13 @@ export default {
   }
 }
 
-.close-icon {
-  float: right;
-  color: white;
-  font-size: 24px;
-  position: relative;
-  top: 7px;
-  right: 13px;
-  cursor: pointer;
-  font-size: 2rem;
-}
-
 .contact-header {
   background: var(--primary-color);
   color: #fff;
   padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 h3 {
@@ -125,7 +145,7 @@ h3 {
   display: block;
 }
 
-button {
+.save-btn {
   cursor: pointer;
   color: white;
   background: var(--primary-color);
@@ -136,11 +156,11 @@ button {
   margin-top: 10px;
 }
 
-button:hover {
+.save-btn:hover {
   filter: brightness(110%);
 }
 
-button:focus {
+.save-btn:focus {
   outline: none;
 }
 </style>
