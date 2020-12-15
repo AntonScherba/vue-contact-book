@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <Contacts />
-  </div>
+  <Contacts />
 </template>
 
 <script>

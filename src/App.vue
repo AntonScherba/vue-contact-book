@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Contacts</router-link>
+      <router-link to="/vue-contact-book">Contacts</router-link>
     </nav>
     <router-view />
   </div>

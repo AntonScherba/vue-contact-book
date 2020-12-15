@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/vue-contact-book",
     name: "Contacts",
     component: Contacts,
   },
