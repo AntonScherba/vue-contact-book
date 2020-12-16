@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Contact list</h1>
+    <!-- Форма для добавления пользователя -->
     <form @submit.prevent="addContact">
       <label>
         Fullname
@@ -15,6 +16,7 @@
       <button type="submit">Add</button>
     </form>
     <hr />
+    <!-- Список пользователей -->
     <ul>
       <li v-for="(contact, i) in contacts" :key="i">
         <span>
@@ -23,6 +25,7 @@
             <span>{{ contact.name }}</span>
           </router-link>
         </span>
+        <!-- кнопка для удаления пользователя -->
         <button class="remove-btn" @click="removeContact(contact.id)">
           &times;
         </button>

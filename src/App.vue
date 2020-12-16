@@ -37,9 +37,6 @@ li {
   border-radius: 50%;
 }
 
-.edit-btn {
-  margin-right: 1rem;
-}
 a {
   color: #42b983;
 }

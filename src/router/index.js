@@ -13,12 +13,13 @@ const routes = [
   {
     path: "/contact/:id",
     name: "contact",
-    component: () => import("../views/ContactInfo.vue"),
+    component: () => import("../views/ContactsInfo.vue"),
   },
 ];
 
 const router = new VueRouter({
   mode: "history",
+  base: process.env.NODE_ENV === "production" ? "/" : "/vue-contact-book/",
   routes,
 });
 
