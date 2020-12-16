@@ -1,4 +1,3 @@
 module.exports = {
-  publicPath:
-    process.env.NODE_ENV === "production" ? "/vue-contact-book/" : "/",
+  publicPath: "/vue-contact-book/",
 };
